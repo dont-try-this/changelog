@@ -1,0 +1,20 @@
+---
+import { Moon, Sun } from "~components/icons";
+
+---
+<button class="size-12 grid place-items-center [&_svg]:size-3 cursor-pointer" aria-label="Toggle global theme">
+    <Sun class="hidden dark:block" aria-hidden="true" />
+    <Moon class="block dark:hidden" aria-hidden="true" />
+</button>
+
+<script lang="ts">
+    const button = document.querySelector('button')
+    button?.addEventListener('click', () => {
+        const current = localStorage.getItem('theme');
+        const toSet = current === 'light' ? 'dark' : 'light'
+
+        localStorage.setItem('theme', toSet);
+        document.documentElement.classList.remove(current);
+        document.documentElement.classList.add(toSet);
+    })
+</script>

@@ -1,0 +1,32 @@
+---
+import '../styles/global.css'
+import Layout from '../layouts/Layout.astro';
+
+import { getCollection, render } from 'astro:content';
+const changelog = await getCollection('changelog');
+const sorted = changelog.sort((a, b) => a.data.datecreated.getTime() - b.data.datecreated.getTime())
+---
+
+<Layout>
+    <main class="container prose grid grid-cols-1 gap-4">
+    {sorted.map(async (entry) => {
+        const { Content } = await render(entry);
+        return (
+            <section>
+                <h3> {entry.data.title} </h3>
+                <p class="font-bold"> {entry.data.author} </p>
+                <time datetime={entry.data.datecreated.toDateString()}> {entry.data.datecreated.toDateString()} {" "}{entry.data.datecreated.toTimeString()}</time>
+                <ol>
+                    {entry.data.tags.map((t) => {
+                        return (
+                            <li><code>{t.category}|{t.display} </code></li>
+                        )
+                    })}
+                </ol>
+
+                <Content />
+            </section>
+        )
+    })}
+    </main>
+</Layout>
