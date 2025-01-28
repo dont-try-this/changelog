@@ -1,0 +1,40 @@
+---
+import { Changelog } from '~components/icons'
+import { ThemeHeadScript } from '~components/layout/theme.head-script'
+import { ThemeIcon } from '~components/layout/theme.icon'
+---
+
+<!doctype html>
+<html lang="en" class="antialiased">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Changelog</title>
+
+        <ThemeHeadScript />
+	</head>
+
+    <header class="sticky top-0 z-10 bg-background/30 backdrop-blur-2xl w-full">
+        <nav class="flex justify-between">
+            <span class="grid grid-cols-[auto_auto] items-center gap-1" aria-label="Changelog logo">
+                <Changelog class="size-4 m-4" aria-hidden="true" />
+                <h2>Changelog</h2>
+            </span>
+            <ThemeIcon />
+        </nav>
+    </header>
+	<body>
+		<slot />
+	</body>
+</html>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+</style>
